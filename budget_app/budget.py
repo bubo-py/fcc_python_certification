@@ -41,6 +41,17 @@ class Category:
         else:
             return False
 
+    def __str__(self):
+        printed = self.category.center(30, '*') + '\n'
+        formated_description = lambda item : item['description'][:23].ljust(23)
+        formated_amount = lambda item : format(item['amount'], '.2f').rjust(7)
+
+        for item in self.ledger:
+            printed += f"{formated_description(item)}{formated_amount(item)}\n"
+
+        printed += f"Total: {format(self.get_balance(), '.2f')}" # '.2f' is code for number formating in python
+        return printed
+
 
 def create_spend_chart(categories):
     pass # todo
