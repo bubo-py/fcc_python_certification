@@ -1,16 +1,19 @@
 
 class Category:
 
+    # initial parameters
     def __init__(self, category):
         self.category = category
         self.ledger = list()
 
+    # make dictionary with given amount and description, add it to the ledger
     def deposit(self, amount, description=""):
         self.amount = amount
         self.description = description
         self.dictionary = {"amount": amount, "description": description}
         self.ledger.append(self.dictionary)
 
+    # if there's enough funds to make a withdraw - do it, return true if withdraw happened
     def withdraw(self, amount, description=""):
         self.amount = amount
         self.description = description
@@ -21,12 +24,14 @@ class Category:
         else:
             return False
 
+    # get balance from the ledger by summing its values
     def get_balance(self):
         self.balance = list()
         for values in self.ledger:
             self.balance.append(values.get('amount'))
         return sum(self.balance)
 
+    # if there's enough funds to make a transfer - do it; return true transfer happened
     def transfer(self, amount, budget_category):
         if self.check_funds(amount):
             self.withdraw(amount, f"Transfer to {budget_category.category}")
@@ -35,13 +40,16 @@ class Category:
         else:
             return False
 
+    # check if there are any funds to transfer or withdraw
     def check_funds(self, amount):
         if amount <= self.get_balance():
             return True
         else:
             return False
 
+    # "print" class as a string
     def __str__(self):
+        # printing "*" and formatting strings
         printed = self.category.center(30, '*') + '\n'
         formated_description = lambda item : item['description'][:23].ljust(23)
         formated_amount = lambda item : format(item['amount'], '.2f').rjust(7)
@@ -49,7 +57,7 @@ class Category:
         for item in self.ledger:
             printed += f"{formated_description(item)}{formated_amount(item)}\n"
 
-        printed += f"Total: {format(self.get_balance(), '.2f')}" # '.2f' is code for number formating in python
+        printed += f"Total: {format(self.get_balance(), '.2f')}" # '.2f' is code for number formating in python, https://mkaz.blog/code/python-string-format-cookbook/
         return printed
 
 
