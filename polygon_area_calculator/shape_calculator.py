@@ -32,16 +32,16 @@ class Rectangle:
         return int(w_inside * h_inside)
     
     def __str__(self):
-        return f"Rectangle(width={self.width}, height={self.height})"
+        return f"Rectangle(width={self.width}, height={self.height})" # return string object
 
 
 class Square(Rectangle):
     def __init__(self, side):
-        super().__init__(side, side)
+        super().__init__(side, side) # get values from parent init function(from rectangle class)
 
     def set_side(self, number):
-        super().set_width(number)
+        super().set_width(number) # access methods from rectangle class
         super().set_height(number)
 
     def __str__(self):
-        return f"Square(side={self.width})"
+        return f"Square(side={self.width})" # return string object
